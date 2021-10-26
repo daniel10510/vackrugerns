@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  ws:
+    build: './springboot-service-vackrugerns/'
+    container_name: ws-vackrugern
+    environment:
+      - DB_HOSTNAME=db
+      - DB_PORT=5432
+      - DB_DB_NAME=kruger
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres
+      - SQL_AUTO=none
+      - SQL_LOG=off
+      - CLIENT_ID=frontendapp
+      - CLIENT_SECRET=123456
+      - JWT_KEY=c0d1g0
+    ports:
+      - "9100:9100"
+    depends_on:
+      - "db"
+    networks:
+      - vackrugernet
+  db:
+    image: postgres:alpine
+    container_name: db-postgresql
+    restart: unless-stopped
+    tty: true
+    volumes:
+     - ./db:/docker-entrypoint-initdb.d/
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=kruger
+      - LANG='en_US.UTF-8'
+    ports:
+        - 5432:5432
+    networks:
+      - vackrugernet
+
+networks:
+  vackrugernet:

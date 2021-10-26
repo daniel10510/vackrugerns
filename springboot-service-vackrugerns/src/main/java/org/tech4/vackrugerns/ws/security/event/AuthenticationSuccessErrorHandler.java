@@ -23,8 +23,9 @@ public class AuthenticationSuccessErrorHandler implements AuthenticationEventPub
 	
 	@Override
 	public void publishAuthenticationSuccess(Authentication authentication) {
-		UserDetails user = (UserDetails) authentication.getPrincipal();
-		String mensaje = "Success Login: " + user.getUsername();
+		//UserDetails user = (UserDetails) authentication.getPrincipal();
+		//String mensaje = "Success Login: " + user.getUsername();
+		String mensaje = "Success Login: " + authentication.getPrincipal();
 		System.out.println(mensaje);
 		logger.info(mensaje);
 	}

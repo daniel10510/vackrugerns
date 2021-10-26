@@ -9,6 +9,8 @@ import javax.persistence.ManyToOne;
 @Embeddable
 public class UserVaccinePK implements Serializable{
 
+	private static final long serialVersionUID = -630291638142583052L;
+
 	@ManyToOne
 	@JoinColumn(name = "idVaccine", nullable = false)
 	private Vaccine vaccine;

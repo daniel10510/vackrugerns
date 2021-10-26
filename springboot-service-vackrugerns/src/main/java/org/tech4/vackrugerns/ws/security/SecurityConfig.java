@@ -1,7 +1,5 @@
 package org.tech4.vackrugerns.ws.security;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -34,9 +32,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Value("${security.security-realm}")
 	private String securityRealm;
-	
-	@Autowired
-	private DataSource dataSource;
 	
 	@Autowired	
 	private UserDetailsService userDetailsService;
@@ -78,7 +73,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Bean
 	public TokenStore tokenStore() {
 		return new JwtTokenStore(accessTokenConverter());
-		//return new JdbcTokenStore(this.dataSource);
 	}
 	
 	@Bean
