@@ -22,8 +22,8 @@ public class AuthException implements AuthenticationEntryPoint {
 		final Map<String, Object> mapException = new HashMap<>();
 
 		mapException.put("error", "401");
-		mapException.put("message", "No estas autorizado para acceder a este recurso");
-		mapException.put("exception", "No autorizado");
+		mapException.put("message", "You are not authorized to access this resource ");
+		mapException.put("exception", "Not authorized ");
 		mapException.put("path", request.getServletPath());
 		mapException.put("timestamp", (new Date()).getTime());
 

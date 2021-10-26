@@ -13,7 +13,7 @@ public class UserVaccine {
 	private Vaccine vaccine;
 
 	@Id
-	private User user;
+	private UserSystem user;
 	
 	@Column(name = "date_vaccine", length = 30)
 	private String dateVaccine;
@@ -30,11 +30,11 @@ public class UserVaccine {
 		this.vaccine = vaccine;
 	}
 
-	public User getUser() {
+	public UserSystem getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(UserSystem user) {
 		this.user = user;
 	}
 

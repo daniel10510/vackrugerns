@@ -1,13 +1,28 @@
 package org.tech4.vackrugerns.ws;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
-public class SpringbootServiceVackrugernsApplication {
+public class SpringbootServiceVackrugernsApplication implements CommandLineRunner {
 
+	@Autowired
+	private BCryptPasswordEncoder passwordEncode;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(SpringbootServiceVackrugernsApplication.class, args);
+	}
+	
+	@Override
+	public void run(String... args) throws Exception {
+		String password = "123456";
+		for (int i = 0; i < 2; i++) {
+			String passworBCrypt = passwordEncode.encode(password);
+			System.out.println(passworBCrypt);
+		}
 	}
 
 }

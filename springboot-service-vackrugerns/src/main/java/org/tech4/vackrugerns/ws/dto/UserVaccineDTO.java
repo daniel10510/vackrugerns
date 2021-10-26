@@ -1,20 +1,20 @@
 package org.tech4.vackrugerns.ws.dto;
 
-import org.tech4.vackrugerns.ws.model.User;
+import org.tech4.vackrugerns.ws.model.UserSystem;
 import org.tech4.vackrugerns.ws.model.Vaccine;
 
 public class UserVaccineDTO {
 
-	private User user;
+	private UserSystem user;
 	private Vaccine vaccine;
 	private String dateVaccine;
 	private String numDosis;
 
-	public User getUser() {
+	public UserSystem getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(UserSystem user) {
 		this.user = user;
 	}
 

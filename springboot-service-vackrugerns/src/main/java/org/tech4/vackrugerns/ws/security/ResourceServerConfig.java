@@ -16,7 +16,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Autowired
     private ResourceServerTokenServices tokenServices;
 	
-    @Value("${security.jwt.resource-ids}")
+	@Value("${config.security.oauth.jwt.key}")
     private String resourceIds;
 
     @Override
@@ -32,14 +32,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .requestMatchers()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/v2/api-docs/**" ).authenticated()
-                .antMatchers("/consultas/**" ).authenticated()                
-                .antMatchers("/especialidades/**" ).authenticated()
-                .antMatchers("/examenes/**" ).authenticated()
-                .antMatchers("/medicos/**" ).authenticated()
-                .antMatchers("/menus/**" ).authenticated()
-                .antMatchers("/consultaexamenes/**" ).authenticated()
-                .antMatchers("/pacientes/**" ).authenticated();
+                .antMatchers("/v2/api-docs/**").authenticated()
+                .antMatchers("/user/**").authenticated();
     }    
 
 }

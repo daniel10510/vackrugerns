@@ -1,12 +1,16 @@
 package org.tech4.vackrugerns.ws.model;
 
-import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Email;
@@ -17,7 +21,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
-public class User{
+public class UserSystem {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,7 +53,7 @@ public class User{
 	private String email;
 
 	@Column(name = "user_name", unique = true, length = 50)
-	private String userName;
+	private String username;
 
 	@Column(length = 100)
 	private String password;
@@ -66,12 +70,19 @@ public class User{
 	@Column(name = "state_vaccine", nullable = false)
 	private boolean stateVaccine;
 
-	public int getId() {
+	@Column(name = "state", nullable = false)
+	private boolean enabled;
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "user_rol", joinColumns = @JoinColumn(name = "id_user", referencedColumnName = "idUser"), inverseJoinColumns = @JoinColumn(name = "id_rol", referencedColumnName = "idRol"))
+	private List<Rol> rols;
+
+	public int getIdUser() {
 		return idUser;
 	}
 
-	public void setId(int id) {
-		this.idUser = id;
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
 	}
 
 	public String getDocNumber() {
@@ -106,12 +117,12 @@ public class User{
 		this.email = email;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
@@ -153,7 +164,23 @@ public class User{
 	public void setStateVaccine(boolean stateVaccine) {
 		this.stateVaccine = stateVaccine;
 	}
-	
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public List<Rol> getRols() {
+		return rols;
+	}
+
+	public void setRols(List<Rol> rols) {
+		this.rols = rols;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -170,7 +197,7 @@ public class User{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		UserSystem other = (UserSystem) obj;
 		if (idUser != other.idUser)
 			return false;
 		return true;
@@ -178,9 +205,10 @@ public class User{
 
 	@Override
 	public String toString() {
-		return "User [idUser=" + idUser + ", docNumber=" + docNumber + ", name=" + name + ", lastName=" + lastName + ", email="
-				+ email + ", userName=" + userName + ", password=" + password + ", dateOfBirth=" + dateOfBirth
-				+ ", address=" + address + ", phone=" + phone + ", stateVaccine=" + stateVaccine + "]";
+		return "User [idUser=" + idUser + ", docNumber=" + docNumber + ", name=" + name + ", lastName=" + lastName
+				+ ", email=" + email + ", username=" + username + ", password=" + password + ", dateOfBirth="
+				+ dateOfBirth + ", address=" + address + ", phone=" + phone + ", stateVaccine=" + stateVaccine
+				+ ", enabled=" + enabled + ", rols=" + rols + "]";
 	}
 
 }

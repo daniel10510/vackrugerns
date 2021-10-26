@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.tech4.vackrugerns.ws.dto.UserDTO;
 import org.tech4.vackrugerns.ws.dto.UserVaccineDTO;
 import org.tech4.vackrugerns.ws.model.Mail;
-import org.tech4.vackrugerns.ws.model.User;
+import org.tech4.vackrugerns.ws.model.UserSystem;
 import org.springframework.http.HttpStatus;
 import org.tech4.vackrugerns.ws.service.IUserService;
 import org.tech4.vackrugerns.ws.util.Constant;
@@ -43,7 +43,7 @@ public class UserController {
 	@GetMapping(value = "/{id}", produces = "application/json")
 	public UserDTO listById(@PathVariable("id") Integer id) {
 		logger.info(String.valueOf(id));	
-		User user = new User(); 
+		UserSystem user = new UserSystem(); 
 		user = iUserService.listById(id);
 		
 		UserDTO userDTO = new UserDTO();
@@ -61,13 +61,13 @@ public class UserController {
 
 	@PostMapping(produces = "application/json", consumes = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
-	public UserDTO create(@RequestBody User user) {
+	public UserDTO create(@RequestBody UserSystem user) {
 		logger.info(user.toString());		
 		
-		user.setUserName(user.getDocNumber());
+		user.setUsername(user.getDocNumber());
 		user.setPassword(SecurityPassword.generateSecureRandomPassword());
 		
-		User userResp = new User(); 
+		UserSystem userResp = new UserSystem(); 
 		userResp = iUserService.create(user);
 		
 		UserDTO userDTO = new UserDTO();
@@ -89,7 +89,7 @@ public class UserController {
 	@PutMapping(value = "/{id}", produces = "application/json", consumes = "application/json")
 	public UserDTO registrar(@PathVariable Integer id, @RequestBody UserVaccineDTO userVaccineDTO) {
 		logger.info(userVaccineDTO.toString());
-		User user = new User(); 
+		UserSystem user = new UserSystem(); 
 		user = iUserService.listById(id);
 		user.setDateOfBirth(userVaccineDTO.getUser().getDateOfBirth());
 		user.setAddress(userVaccineDTO.getUser().getAddress());

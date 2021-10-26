@@ -1,19 +1,30 @@
 package org.tech4.vackrugerns.ws.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tech4.vackrugerns.ws.dao.IUserDAO;
 import org.tech4.vackrugerns.ws.dao.IUserVaccineDAO;
 import org.tech4.vackrugerns.ws.dto.UserDTO;
 import org.tech4.vackrugerns.ws.dto.UserVaccineDTO;
-import org.tech4.vackrugerns.ws.model.User;
+import org.tech4.vackrugerns.ws.model.UserSystem;
 import org.tech4.vackrugerns.ws.service.IUserService;
 
 @Service
-public class UserServiceImpl implements IUserService {
+public class UserServiceImpl implements IUserService, UserDetailsService {
+	
+	private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 	
 	@Autowired
 	private IUserDAO iUserDAO;
@@ -22,13 +33,13 @@ public class UserServiceImpl implements IUserService {
 	private IUserVaccineDAO uvDao;
 	
 	@Override
-	public User create(User t) {
+	public UserSystem create(UserSystem t) {
 		// TODO Auto-generated method stub 
 		return iUserDAO.save(t);
 	}
 
 	@Override
-	public User update(User t) {
+	public UserSystem update(UserSystem t) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -39,28 +50,28 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public User listById(int id) {
+	public UserSystem listById(int id) {
 		// TODO Auto-generated method stub
-		return iUserDAO.getById(id);
+		return iUserDAO.getOne(id);
 	}
 
 	@Override
-	public List<User> list() {
+	public List<UserSystem> list() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public User listByUsername(String username) {
+	public UserSystem listByUsername(String username) {
 		// TODO Auto-generated method stub
-		return iUserDAO.findByUserName(username);
+		return iUserDAO.findOneByUsername(username);
 	}
 	
 	@Transactional
 	@Override
 	public UserDTO registrarTransaccional(UserVaccineDTO userVaccineDTO) {
 		iUserDAO.save(userVaccineDTO.getUser());
-		uvDao.registrar(userVaccineDTO.getUser().getId(), userVaccineDTO.getVaccine().getId(), userVaccineDTO.getDateVaccine(), userVaccineDTO.getNumDosis());
+		uvDao.registrar(userVaccineDTO.getUser().getIdUser(), userVaccineDTO.getVaccine().getId(), userVaccineDTO.getDateVaccine(), userVaccineDTO.getNumDosis());
 		
 		UserDTO userDTO = new UserDTO();
 		userDTO.setAddress(userVaccineDTO.getUser().getAddress());
@@ -73,6 +84,28 @@ public class UserServiceImpl implements IUserService {
 		userDTO.setStateVaccine(userVaccineDTO.getUser().isStateVaccine());
 
 		return userDTO;
+	}
+	
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		logger.info(username);
+		
+		UserSystem user = iUserDAO.findOneByUsername(username); //from usuario where username := username
+		
+		if (user == null) {
+			throw new UsernameNotFoundException(String.format("Usuario no existe", username));
+		}
+		
+		List<GrantedAuthority> authorities = new ArrayList<>();
+		
+		user.getRols().forEach( role -> {
+			authorities.add(new SimpleGrantedAuthority(role.getName()));
+		});
+		
+		UserDetails userDetails = new User(user.getUsername(), user.getPassword(), authorities);
+		
+		return userDetails;
+		
 	}
 
 }

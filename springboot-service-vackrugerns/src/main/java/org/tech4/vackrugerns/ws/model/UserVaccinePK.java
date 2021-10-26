@@ -15,7 +15,7 @@ public class UserVaccinePK implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name = "idUser", nullable = false)
-	private User user;
+	private UserSystem user;
 
 	@Override
 	public int hashCode() {
