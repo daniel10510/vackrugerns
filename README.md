@@ -33,7 +33,7 @@ Estas instrucciones te permitirán obtener una copia del proyecto en funcionamie
 
 * Importar los archivos "/springboot-service-vackrugern/newman/KRUGER.postman_collection.json" y "/springboot-service-vackrugern/newman/vackrugern.postman_environment.json" a la herramienta Postman
 * Obtener el token a partir de la consulta "oauth"
-* Crear un usuario a partir de la consulta "create-user"
+* Crear un usuario a partir de la consulta "create-user" (Se enviará un correo a la cuenta ingresada, con las credenciales de acceso)
 * Actualizar datos del usaurio a partir de la consulta "update-user"
 
 ## Quitar despliegue
@@ -47,6 +47,15 @@ Estas instrucciones te permitirán obtener una copia del proyecto en funcionamie
 
 * Abrir un navegador e ingresar la siguiente url
     http://localhost:9100/swagger-ui.html#/
+
+
+## Evidencias
+
+![oauth_postman](https://user-images.githubusercontent.com/12236951/138925903-dfd99c76-c868-4f9c-bf17-a4db518b94da.png)
+
+![getuser_postman](https://user-images.githubusercontent.com/12236951/138925961-fde54e54-fd8c-4fd3-baae-2f3c7f08036c.png)
+
+![send_mail](https://user-images.githubusercontent.com/12236951/138925968-76148088-45d7-4fa2-9385-9327ce65ec9a.png)
 
 ## EXTRAS
 
