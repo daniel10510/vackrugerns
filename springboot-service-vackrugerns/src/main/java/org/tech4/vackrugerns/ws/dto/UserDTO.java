@@ -1,4 +1,4 @@
-package org.tech4.vackrugerns.ws.model;
+package org.tech4.vackrugerns.ws.dto;
 
 public class UserDTO {
 
@@ -6,10 +6,10 @@ public class UserDTO {
 	private String name;
 	private String lastName;
 	private String email;
-	private String userName;
 	private String dateOfBirth;
 	private String address;
 	private String phone;
+	private boolean stateVaccine;
 
 	public String getDocNumber() {
 		return docNumber;
@@ -43,14 +43,6 @@ public class UserDTO {
 		this.email = email;
 	}
 
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
 	public String getDateOfBirth() {
 		return dateOfBirth;
 	}
@@ -75,11 +67,19 @@ public class UserDTO {
 		this.phone = phone;
 	}
 
+	public boolean isStateVaccine() {
+		return stateVaccine;
+	}
+
+	public void setStateVaccine(boolean stateVaccine) {
+		this.stateVaccine = stateVaccine;
+	}
+
 	@Override
 	public String toString() {
 		return "UserDTO [docNumber=" + docNumber + ", name=" + name + ", lastName=" + lastName + ", email=" + email
-				+ ", userName=" + userName + ", dateOfBirth=" + dateOfBirth + ", address=" + address + ", phone="
-				+ phone + "]";
+				+ ", dateOfBirth=" + dateOfBirth + ", address=" + address + ", phone=" + phone + ", stateVaccine="
+				+ stateVaccine + "]";
 	}
 
 }
