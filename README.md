@@ -70,7 +70,7 @@ Estas instrucciones te permitirán obtener una copia del proyecto en funcionamie
 
 ## Versionado 📌
 
-Usamos [SemVer](http://semver.org/) para el versionado.
+Usamos [GitHub](https://github.com/) para el versionado.
 
 ## Licencia 📄
 
