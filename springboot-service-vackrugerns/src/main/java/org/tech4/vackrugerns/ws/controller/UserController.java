@@ -81,7 +81,7 @@ public class UserController {
 		model.put("password", user.getPassword());
 		Mail mail = emailService.prepMailWithBody(mailServerHost, user.getEmail(),
 				Constant.SUBJECT_EMAIL_BIENVENIDA, model);
-		//emailService.sendEmailCodVerif(mail);
+		emailService.sendEmailCodVerif(mail);
 		
 		return userDTO;
 	}
