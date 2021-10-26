@@ -1,0 +1,36 @@
+pipeline {
+
+    agent any
+
+    stages {
+    	stage('Build backend') {
+            steps {
+                echo "Build backend with maven"
+                sh 'mvn -B -DskipTests clean package'
+            }
+        }
+    }
+    
+    post {
+        always {
+            echo "Save Artifact"
+            archiveArtifacts artifacts: 'target/vackrugern.jar', onlyIfSuccessful: true
+        }
+
+        success {
+            echo "success"
+        }
+
+        unstable {
+            echo "unstable"
+        }
+
+        failure {
+            echo "failure"
+        }
+
+        changed {
+            echo "changed"
+        }
+    }
+}

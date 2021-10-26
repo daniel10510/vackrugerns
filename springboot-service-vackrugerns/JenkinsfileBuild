@@ -1,0 +1,43 @@
+pipeline {
+
+    agent any
+
+    environment {
+        INTERNAL_DOCKER_BACKEND = "daniel10510/vackrugern:${env.BUILD_NUMBER}"
+    }
+
+    stages {
+
+        stage('Build backend image') {
+           steps {
+               sh "docker build -t ${INTERNAL_DOCKER_BACKEND} ."
+               withCredentials([usernamePassword( credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    sh "docker login -u ${USERNAME} -p ${PASSWORD}"
+                    sh "docker push ${INTERNAL_DOCKER_BACKEND}"
+               }
+           }
+        }
+    }
+    
+    post {
+        always {
+            echo "Pushing docker hub successfully"
+        }
+
+        success {
+            echo "success"
+        }
+
+        unstable {
+            echo "unstable"
+        }
+
+        failure {
+            echo "failure"
+        }
+
+        changed {
+            echo "changed"
+        }
+    }
+}

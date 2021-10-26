@@ -1,0 +1,148 @@
+{
+	"info": {
+		"_postman_id": "241c979e-063b-4501-8cf9-aed1e1f50a08",
+		"name": "KRUGER",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create-user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzUyNjM3ODYsInVzZXJfbmFtZSI6InBlcGUiLCJqdGkiOiI2MmNjYzc5ZC1jYWVkLTQ5NjktYmRhMy1iNTg1YzlmNDllM2MiLCJjbGllbnRfaWQiOiJmcm9udGVuZGFwcCIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdfQ.GDLllcp6dFmJ5n4oMernecVUgolNZPuv2ZWtI-mfiQs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"docNumber\": \"1234567891\",\n    \"name\": \"dani\",\n    \"lastName\": \"herrera\",\n    \"email\": \"daniel.10510@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{service_url}}:{{service_port}}/user/",
+					"host": [
+						"{{service_url}}"
+					],
+					"port": "{{service_port}}",
+					"path": [
+						"user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{service_url}}:{{service_port}}/user/1",
+					"host": [
+						"{{service_url}}"
+					],
+					"port": "{{service_port}}",
+					"path": [
+						"user",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update-user",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user\": {\n        \"docNumber\": \"1234567890\",\n        \"dateOfBirth\": \"11/11/1990\",\n        \"address\": \"la paz 123\",\n        \"phone\": \"723549865\",\n        \"stateVaccine\": true\n    },\n    \"vaccine\":{\n        \"idVaccine\": 1\n    },\n    \"dateVaccine\": \"20/20/2021\",\n    \"numDosis\": \"2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{service_url}}:{{service_port}}/user/1",
+					"host": [
+						"{{service_url}}"
+					],
+					"port": "{{service_port}}",
+					"path": [
+						"user",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "oauth",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "frontendapp",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "pepe",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{service_url}}:{{service_port}}/oauth/token",
+					"host": [
+						"{{service_url}}"
+					],
+					"port": "{{service_port}}",
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
