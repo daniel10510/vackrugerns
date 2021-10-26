@@ -8,7 +8,7 @@ Estas instrucciones te permitirán obtener una copia del proyecto en funcionamie
 
 ## Arquitectura tecnológica
 
-
+![stack-tecnologico-RETO-KRUGER](https://user-images.githubusercontent.com/12236951/138923948-30be892b-efc5-45d8-9656-ffbacad83a03.png)
 
 ### Pre-requisitos 📋
 
